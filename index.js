@@ -6,11 +6,13 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 app.use(express.json());
 
+app.use("/products", require("./routes/products.route.js"));
+
 const dbConnect = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_URI);
     console.log("Connected to DB successfully");
-  } catch (error) {
+  } catch (err) {
     console.error(err);
     process.exit(1);
   }
