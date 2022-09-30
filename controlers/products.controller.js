@@ -27,6 +27,15 @@ const createProduct = async productToSave => {
   }
 };
 
+
+const updateProduct = async (id, productToUpdate) => {
+  try {
+    return await Product.findByIdAndUpdate(id, productToUpdate, { new: true });
+  } catch (err) {
+    throw { status: 400, msg: err };
+  }
+};
+
 const deleteProductById = async id => await Product.findByIdAndDelete(id);
 
 module.exports = {
@@ -34,4 +43,5 @@ module.exports = {
   createProduct,
   findProductById,
   deleteProductById,
+  updateProduct,
 };
