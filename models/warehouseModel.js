@@ -8,7 +8,8 @@ const warehouseSchema = {
   },
   address: String,
   phoneNumber: Number,
-  capacity: Number,
+  fullCapacity: Number,
+  currentCapacity: Number,
   createdAt: {
     type: Date,
     default: () => Date.now(),

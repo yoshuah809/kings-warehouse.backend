@@ -2,4 +2,18 @@ const Warehouse = require("../models/warehouseModel");
 
 const findAllWarehouses = async () => await Warehouse.find();
 
-module.exports = { findAllWarehouses };
+const findWarehouseById = async id => {
+  try {
+    const warehouse = await Warehouse.findById(id);
+
+    if (warehouse == null) {
+      throw { status: 204, msg: `No warehouse with the id ${id} was found.` };
+      return { status: 204, msg: `No warehouse with the id ${id} was found.` };
+    }
+    return warehouse;
+  } catch (e) {
+    throw e;
+  }
+};
+
+module.exports = { findAllWarehouses, findWarehouseById };
