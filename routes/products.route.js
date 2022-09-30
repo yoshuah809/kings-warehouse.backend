@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const {
   findAllProducts,
   createProduct,
+  findProductById,
+  deleteProductById,
 } = require("../controlers/products.controller");
 const router = express.Router();
 
@@ -18,6 +20,17 @@ router.get("/", async (req, res) => {
   res.json(products);
 });
 
+router.get("/:id", validateObjectId, async (req, res) => {
+  try {
+    const product = await findProductById(req.params.id);
+    res.json(product);
+  } catch (err) {
+    // Rejected Promise AKA no product found
+    console.log(err);
+    res.status(err?.status ?? 500).json(err);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     const product = createProduct(req.body);
@@ -26,6 +39,15 @@ router.post("/", async (req, res) => {
     res.status(err?.status ?? 500).json(err);
   }
 });
+
+router.delete("/:id", validateObjectId, async (req, res) => {
+  try {
+    await deleteProductById(req.params.id);
+    res.send(); // 200 OK is good
+  } catch (err) {
+    res.status(err?.status ?? 500).json(err);
+  }
+}); 
 
 
 module.exports = router;
