@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const { findAllProducts } = require("../controlers/products.controller");
 const router = express.Router();
 
 //Custom Validation Functions
@@ -10,10 +11,8 @@ const validateObjectId = (req, res, next) => {
 };
 
 router.get("/", async (req, res) => {
-  // const pokemon = await findAllPokemons();
-  // res.json(pokemon);
-
-  res.json("Welcome to this page");
+  const products = await findAllProducts();
+  res.json(products);
 });
 
 module.exports = router;
