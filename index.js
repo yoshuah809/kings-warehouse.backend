@@ -7,6 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/products", require("./routes/products.route.js"));
+app.use("/warehouses", require("./routes/warehouse.route.js"));
 
 const dbConnect = async () => {
   try {
