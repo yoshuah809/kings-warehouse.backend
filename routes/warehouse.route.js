@@ -7,6 +7,7 @@ const {
   findWarehouseById,
   createWarehouse,
   deleteWarehouseById,
+  updateWarehouse,
 } = require("../controlers/warehouse.controller");
 
 //Custom Validation Functions
@@ -36,6 +37,17 @@ router.post("/", async (req, res) => {
   try {
     const warehouse = createWarehouse(req.body);
     res.status(201).json(warehouse);
+  } catch (err) {
+    res.status(err?.status ?? 500).json(err);
+  }
+});
+
+// UPDATE A WAREHOUSE
+router.put("/:id", validateObjectId, async (req, res) => {
+  try {
+    // For PUT requests, the data to update comes through the request body as well
+    const warehouse = await updateWarehouse(req.params.id, req.body);
+    res.send({ warehouse });
   } catch (err) {
     res.status(err?.status ?? 500).json(err);
   }
