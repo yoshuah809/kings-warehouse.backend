@@ -18,6 +18,7 @@ const productSchema = {
     type: Date,
     default: () => Date.now(),
     immutable: true,
+    required: true,
   },
 };
 

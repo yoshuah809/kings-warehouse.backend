@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const { findAllProducts } = require("../controlers/products.controller");
+const {
+  findAllProducts,
+  createProduct,
+} = require("../controlers/products.controller");
 const router = express.Router();
 
 //Custom Validation Functions
@@ -14,5 +17,15 @@ router.get("/", async (req, res) => {
   const products = await findAllProducts();
   res.json(products);
 });
+
+router.post("/", async (req, res) => {
+  try {
+    const product = createProduct(req.body);
+    res.status(201).json(product);
+  } catch (err) {
+    res.status(err?.status ?? 500).json(err);
+  }
+});
+
 
 module.exports = router;
