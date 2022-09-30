@@ -6,6 +6,7 @@ const {
   findAllWarehouses,
   findWarehouseById,
   createWarehouse,
+  deleteWarehouseById,
 } = require("../controlers/warehouse.controller");
 
 //Custom Validation Functions
@@ -35,6 +36,15 @@ router.post("/", async (req, res) => {
   try {
     const warehouse = createWarehouse(req.body);
     res.status(201).json(warehouse);
+  } catch (err) {
+    res.status(err?.status ?? 500).json(err);
+  }
+});
+
+router.delete("/:id", validateObjectId, async (req, res) => {
+  try {
+    await deleteWarehouseById(req.params.id);
+    res.send(); // 200 OK is good
   } catch (err) {
     res.status(err?.status ?? 500).json(err);
   }

@@ -25,4 +25,12 @@ const createWarehouse = async warehouseToSave => {
     throw error;
   }
 };
-module.exports = { findAllWarehouses, findWarehouseById, createWarehouse };
+
+const deleteWarehouseById = async id => await Warehouse.findByIdAndDelete(id);
+
+module.exports = {
+  findAllWarehouses,
+  findWarehouseById,
+  createWarehouse,
+  deleteWarehouseById,
+};
