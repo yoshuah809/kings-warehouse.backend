@@ -16,4 +16,13 @@ const findWarehouseById = async id => {
   }
 };
 
-module.exports = { findAllWarehouses, findWarehouseById };
+const createWarehouse = async warehouseToSave => {
+  try {
+    const warehouse = new Warehouse(warehouseToSave);
+    await warehouse.save({ new: true });
+    return warehouse;
+  } catch (error) {
+    throw error;
+  }
+};
+module.exports = { findAllWarehouses, findWarehouseById, createWarehouse };

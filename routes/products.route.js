@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// UPDATE A POKEMON
+// UPDATE A PRODUCT
 router.put("/:id", validateObjectId, async (req, res) => {
   try {
     // For PUT requests, the data to update comes through the request body as well
